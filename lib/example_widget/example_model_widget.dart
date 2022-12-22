@@ -7,36 +7,34 @@ class ExampleModelWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   ViewModelBuilder<ExampleModelData>  //Надо указывать, чтоб он понимал какого типа model, иначе model - это Object
-      (
-      createModelDataEx: () => ExampleModelData(initValue: 100),
-        builder: (context, model){
-      return
-        Scaffold(
-          appBar: AppBar(
-            title: const Text('Test'),
-          ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'You have pushed the button this many times:',
-                ),
-                Text(
-                  model.getCount.toString(),                              //взяли значение
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ],
+    return ViewModelBuilder<ExampleModelData> //Надо указывать, чтоб он понимал какого типа model, иначе model - это Object
+        (
+        createModelDataEx: () => ExampleModelData(initValue: 100),    //передаем модель для управления
+        builder: (context, model) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Test'),
             ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: model.increment,                                  //применили функцию
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-        );
-    });
-
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    'You have pushed the button this many times:',
+                  ),
+                  Text(
+                    model.getCount.toString(), //взяли значение
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ],
+              ),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: model.increment, //применили функцию
+              tooltip: 'Increment',
+              child: const Icon(Icons.add),
+            ),
+          );
+        });
   }
 }
