@@ -19,22 +19,64 @@ class ExampleModelWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text(
-                    'You have pushed the button this many times:',
-                  ),
-                  Text(
-                    model.getCount.toString(), //взяли значение
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
+                  SimpleText(),
+                  incrementTitle(title: model.getCount.toString()),
+
+                  IncrementButton(onTap: model.increment,)
+
                 ],
               ),
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: model.increment, //применили функцию
-              tooltip: 'Increment',
-              child: const Icon(Icons.add),
-            ),
+            // floatingActionButton: FloatingActionButton(
+            //   onPressed: model.increment, //применили функцию
+            //   tooltip: 'Increment',
+            //   child: const Icon(Icons.add),
+            // ),
           );
         });
+  }
+}
+
+class incrementTitle extends StatelessWidget {
+  final String title;
+
+  const incrementTitle({
+    Key? key, required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print('build count title');
+    return Text(
+      title, //взяли значение
+      style: Theme.of(context).textTheme.headline4,
+    );
+  }
+}
+
+class SimpleText extends StatelessWidget {
+  const SimpleText({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print('simple text');
+    return const Text(
+      'You have pushed the button this many times:',
+    );
+  }
+}
+
+class IncrementButton extends StatelessWidget {
+  final VoidCallback onTap;
+  const IncrementButton({
+    Key? key, required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print('build increment');
+    return ElevatedButton(onPressed: onTap, child: Text('+'));
   }
 }
